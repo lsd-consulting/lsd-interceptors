@@ -5,7 +5,7 @@ plugins {
     id 'signing'
     id 'io.github.gradle-nexus.publish-plugin' version '1.3.0'
     id 'com.palantir.git-version' version '3.0.0'
-    id 'org.jetbrains.kotlin.jvm' version '1.9.21'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.23'
 }
 
 apply from: 'hooks.gradle'
@@ -20,7 +20,7 @@ version = gitVersion().replaceAll("^v", "")
 logger.lifecycle("Version:$version")
 
 ext {
-    junitJupiter = '5.10.1'
+    junitJupiter = '5.10.2'
 }
 
 wrapper {
@@ -33,8 +33,8 @@ allprojects {
             implementation 'io.github.lsd-consulting:lsd-core:7.0.25'
             implementation 'io.github.lsd-consulting:lsd-formatting-library:4.0.32'
 
-            testImplementation 'org.assertj:assertj-core:3.24.2'
-            testImplementation 'io.mockk:mockk-jvm:1.13.8'
+            testImplementation 'org.assertj:assertj-core:3.25.3'
+            testImplementation 'io.mockk:mockk-jvm:1.13.10'
             testImplementation "org.junit.jupiter:junit-jupiter:$junitJupiter"
         }
     }
