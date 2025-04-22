@@ -24,7 +24,7 @@ dependencies {
     implementation "com.h2database:h2"
 
     testImplementation(project(':lsd-interceptors'))
-    testImplementation 'io.github.lsd-consulting:lsd-junit5:7.0.129'
+    testImplementation 'io.github.lsd-consulting:lsd-junit5:7.0.130'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
