@@ -96,8 +96,8 @@ subprojects {
                     }
                     repositories {
                         maven {
-                            name = 'sonatype'
-                            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                            name = 'ossrh-staging-api'
+                            url = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
                             credentials(PasswordCredentials)
                         }
                     }
@@ -110,8 +110,8 @@ subprojects {
 nexusPublishing {
     repositories {
         sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
         }
     }
 }
