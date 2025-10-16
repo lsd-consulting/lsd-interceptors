@@ -33,7 +33,7 @@ allprojects {
             implementation 'io.github.lsd-consulting:lsd-core:7.1.11'
             implementation 'io.github.lsd-consulting:lsd-formatting-library:4.0.62'
 
-            testImplementation 'org.assertj:assertj-core:3.26.3'
+            testImplementation 'org.assertj:assertj-core:3.27.6'
             testImplementation 'io.mockk:mockk-jvm:1.13.13'
             testImplementation "org.junit.jupiter:junit-jupiter:$junitJupiter"
         }
