@@ -2,13 +2,19 @@
 
 version: 2
 updates:
+  # Production dependencies - triggers semantic releases
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
       interval: "daily"
     commit-message:
       prefix: "fix"  # Triggers PATCH release
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
+    ignore:
+      # Ignore test dependencies in this update group
+      - dependency-name: "org.assertj:*"
+      - dependency-name: "io.mockk:*"
+      - dependency-name: "org.junit.jupiter:*"
     groups:
       lsd-dependencies:
         patterns:
@@ -27,6 +33,24 @@ updates:
       kotlin-dependencies:
         patterns:
           - "org.jetbrains.kotlin*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Test dependencies - does not trigger semantic releases
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "test"  # Does not trigger semantic release
+    open-pull-requests-limit: 5
+    groups:
+      testing-dependencies:
+        patterns:
+          - "org.assertj:*"
+          - "io.mockk:*"
+          - "org.junit.jupiter:*"
         update-types:
           - "minor"
           - "patch"
