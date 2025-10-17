@@ -30,7 +30,7 @@ wrapper {
 allprojects {
     plugins.withId('java') {
         dependencies {
-            implementation 'io.github.lsd-consulting:lsd-core:7.1.11'
+            implementation 'io.github.lsd-consulting:lsd-core:7.2.1'
             implementation 'io.github.lsd-consulting:lsd-formatting-library:5.0.3'
 
             testImplementation 'org.assertj:assertj-core:3.27.6'
