@@ -1,0 +1,83 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "schedule": [
+    "at any time"
+  ],
+  "platformAutomerge": true,
+  "automergeType": "pr",
+  "packageRules": [
+    {
+      "groupName": "Test dependencies",
+      "matchDepTypes": ["test"],
+      "commitMessagePrefix": "test:",
+      "schedule": [
+        "at any time"
+      ],
+      "automerge": true
+    },
+    {
+      "groupName": "LSD dependencies",
+      "matchPackageNames": [
+        "io.github.lsd-consulting:**"
+      ],
+      "commitMessagePrefix": "fix:",
+      "schedule": [
+        "at any time"
+      ],
+      "automerge": true
+    },
+    {
+      "groupName": "Spring dependencies",
+      "matchPackageNames": [
+        "org.springframework.*:**"
+      ],
+      "commitMessagePrefix": "fix:",
+      "schedule": [
+        "at any time"
+      ],
+      "automerge": true
+    },
+    {
+      "groupName": "Kotlin dependencies",
+      "matchPackageNames": [
+        "org.jetbrains.kotlin*"
+      ],
+      "commitMessagePrefix": "fix:",
+      "schedule": [
+        "at any time"
+      ],
+      "automerge": true
+    },
+    {
+      "groupName": "GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "commitMessagePrefix": "ci:",
+      "schedule": [
+        "before 4am on monday"
+      ],
+      "automerge": true
+    },
+    {
+      "groupName": "All other production dependencies",
+      "excludePackageNames": [
+        "io.github.lsd-consulting:**",
+        "org.springframework.*:**",
+        "org.jetbrains.kotlin*"
+      ],
+      "matchDepTypes": ["dependencies"],
+      "commitMessagePrefix": "fix:",
+      "schedule": [
+        "at any time"
+      ],
+      "automerge": true
+    },
+    {
+      "groupName": "Major version updates (manual review required)",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ]
+}
