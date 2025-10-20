@@ -39,9 +39,14 @@
     {
       "description": "Production dependencies - triggers semantic releases",
       "matchPackagePatterns": [
+        "com.fasterxml.jackson.core:*",
+        "com.j2html:*",
+        "com.squareup.okhttp3:*",
+        "io.github.lsd-consulting*",
+        "jakarta.annotation:*",
+        "org.apache.*",
         "org.jetbrains.kotlin*",
-        "org.springframework*",
-        "io.github.lsd-consulting*"
+        "org.springframework*"
       ],
       "commitMessagePrefix": "fix(deps): "
     },
