@@ -20,7 +20,7 @@ version = gitVersion().replaceAll("^v", "")
 logger.lifecycle("Version:$version")
 
 ext {
-    junitJupiter = '5.11.3'
+    junitJupiter = '5.14.0'
 }
 
 wrapper {
