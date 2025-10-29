@@ -20,7 +20,7 @@ version = gitVersion().replaceAll("^v", "")
 logger.lifecycle("Version:$version")
 
 wrapper {
-    gradleVersion = "8.14.3"
+    gradleVersion = "9.2.0"
 }
 
 allprojects {
