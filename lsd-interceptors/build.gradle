@@ -15,7 +15,7 @@ kotlin {
 }
 
 dependencies {
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.1'
     implementation 'com.j2html:j2html:1.6.0'
     implementation 'com.squareup.okhttp3:okhttp:5.2.1'
     implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
