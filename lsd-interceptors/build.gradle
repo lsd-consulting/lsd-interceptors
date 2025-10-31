@@ -17,7 +17,7 @@ kotlin {
 dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.1'
     implementation 'com.j2html:j2html:1.6.0'
-    implementation 'com.squareup.okhttp3:okhttp:5.2.1'
+    implementation 'com.squareup.okhttp3:okhttp:5.3.0'
     implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
     implementation 'org.apache.commons:commons-lang3:3.19.0'
     implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.13'
