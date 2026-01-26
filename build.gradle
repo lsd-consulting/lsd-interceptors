@@ -30,7 +30,7 @@ allprojects {
             implementation 'io.github.lsd-consulting:lsd-formatting-library:5.0.12'
 
             testImplementation 'org.assertj:assertj-core:3.27.7'
-            testImplementation 'io.mockk:mockk-jvm:1.14.7'
+            testImplementation 'io.mockk:mockk-jvm:1.14.9'
             testImplementation platform("org.junit:junit-bom:6.0.2")
             testImplementation "org.junit.jupiter:junit-jupiter"
             testRuntimeOnly "org.junit.platform:junit-platform-engine"
