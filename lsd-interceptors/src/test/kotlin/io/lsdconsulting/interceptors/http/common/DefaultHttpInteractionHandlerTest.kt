@@ -8,12 +8,7 @@ import com.lsd.core.domain.SequenceEvent
 import io.lsdconsulting.interceptors.common.HeaderKeys
 import io.lsdconsulting.interceptors.http.naming.DestinationNameMappings
 import io.lsdconsulting.interceptors.http.naming.SourceNameMappings
-import io.mockk.every
-import io.mockk.slot
-import io.mockk.spyk
-import io.mockk.verify
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.Duration
 
@@ -24,41 +19,34 @@ internal class DefaultHttpInteractionHandlerTest {
     )
     private val sourceNameMapping = SourceNameMappings { "andrea" }
     private val destinationNameMapping = DestinationNameMappings { "bren" }
-    private val messageSlot = slot<SequenceEvent>()
-    private val lsdContext = spyk<LsdContext>()
+    private val capturedEvents = mutableListOf<SequenceEvent>()
+    private val lsdContext = object : LsdContext() {
+        override fun capture(vararg events: SequenceEvent) {
+            capturedEvents += events
+            super.capture(*events)
+        }
+    }
     private val handler = DefaultHttpInteractionHandler(lsdContext, sourceNameMapping, destinationNameMapping)
     private val bob = ParticipantType.PARTICIPANT.called("bob")
     private val juliet = ParticipantType.PARTICIPANT.called("juliet")
     private val bren = ParticipantType.PARTICIPANT.called("bren")
     private val andrea = ParticipantType.PARTICIPANT.called("andrea")
 
-    @BeforeEach
-    fun setup() {
-        every { lsdContext.capture(capture(messageSlot), any()) } returns Unit
-    }
-
     @Test
     fun usesTestStateToLogRequest() {
         handler.handleRequest("GET", emptyMap(), "/path", "{\"type\":\"request\"}")
-
-        verify { lsdContext.capture(any(), any()) }
-        val (_, from, to, label, type, _, data) = extractFirstMessageFromCaptor()
-
+        val (_, from, to, label, type, _, data) = extractFirstMessage()
         assertThat(from).isEqualTo(andrea)
         assertThat(to).isEqualTo(bren)
         assertThat(label).isEqualTo("GET /path")
         assertThat(type).isEqualTo(MessageType.SYNCHRONOUS)
-        assertThat(data.toString())
-            .contains("<p>{\n  &quot;type&quot;: &quot;request&quot;\n}</p>")
+        assertThat(data.toString()).contains("<p>{\n  &quot;type&quot;: &quot;request&quot;\n}</p>")
     }
 
     @Test
     fun usesTestStateToLogResponse() {
         handler.handleResponse("200 OK", emptyMap(), emptyMap(), "/path", "response body", Duration.ofMillis(5))
-
-        verify { lsdContext.capture(any(), any()) }
-        val (_, from, to, label, type, _, data, duration) = extractFirstMessageFromCaptor()
-
+        val (_, from, to, label, type, _, data, duration) = extractFirstMessage()
         assertThat(from).isEqualTo(bren)
         assertThat(to).isEqualTo(andrea)
         assertThat(label).isEqualTo("200 OK (5ms)")
@@ -70,26 +58,18 @@ internal class DefaultHttpInteractionHandlerTest {
     @Test
     fun headerValuesForSourceAndDestinationArePreferredWhenLoggingRequest() {
         handler.handleRequest("GET", serviceNameHeaders, "/path", "")
-
-        verify { lsdContext.capture(any(), any()) }
-        val (_, from, to, label, type, _, data) = extractFirstMessageFromCaptor()
-
+        val (_, from, to, label, type, _, data) = extractFirstMessage()
         assertThat(from).isEqualTo(juliet)
         assertThat(to).isEqualTo(bob)
         assertThat(label).isEqualTo("GET /path")
         assertThat(type).isEqualTo(MessageType.SYNCHRONOUS)
-        assertThat(data.toString())
-            .contains("Source-Name: juliet")
-            .contains("Target-Name: bob")
+        assertThat(data.toString()).contains("Source-Name: juliet").contains("Target-Name: bob")
     }
 
     @Test
     fun headerValuesForSourceAndDestinationArePreferredWhenLoggingResponse() {
         handler.handleResponse("200 OK", serviceNameHeaders, emptyMap(), "/path", "response body", Duration.ofMillis(3))
-
-        verify { lsdContext.capture(any(), any()) }
-        val (_, from, to, label, type, _, data, duration) = extractFirstMessageFromCaptor()
-
+        val (_, from, to, label, type, _, data, duration) = extractFirstMessage()
         assertThat(from).isEqualTo(bob)
         assertThat(to).isEqualTo(juliet)
         assertThat(label).isEqualTo("200 OK (3ms)")
@@ -102,9 +82,7 @@ internal class DefaultHttpInteractionHandlerTest {
             .contains("<p>response body</p>")
     }
 
-    private fun extractFirstMessageFromCaptor(): Message =
-        messageSlot.captured
-            .takeIf { obj: SequenceEvent -> Message::class.java.isInstance(obj) }
-            ?.let { obj: SequenceEvent -> Message::class.java.cast(obj) }
-            ?: throw Exception()
+    private fun extractFirstMessage(): Message =
+        capturedEvents.filterIsInstance<Message>().firstOrNull()
+            ?: error("No Message captured: $capturedEvents")
 }
