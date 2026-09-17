@@ -2,8 +2,8 @@ package io.lsdconsulting.interceptors.http.common
 
 import com.lsd.core.IdGenerator
 import com.lsd.core.LsdContext
-import com.lsd.core.builders.ActivateLifelineBuilder
-import com.lsd.core.builders.DeactivateLifelineBuilder
+import com.lsd.core.builders.LifelineBuilder
+
 import com.lsd.core.builders.MessageBuilder.Companion.messageBuilder
 import com.lsd.core.domain.MessageType
 import io.lsdconsulting.interceptors.common.HeaderKeys
@@ -34,7 +34,7 @@ data class DefaultHttpInteractionHandler(
                 .data(renderHtmlFor(path, requestHeaders, null, prettyPrint(body), null))
                 .type(MessageType.SYNCHRONOUS)
                 .build(),
-            ActivateLifelineBuilder.activation().of(targetName).colour("skyblue").build()
+            LifelineBuilder.activation().of(targetName).colour("skyblue").build()
         )
     }
 
@@ -60,7 +60,7 @@ data class DefaultHttpInteractionHandler(
                 .colour(colour)
                 .duration(duration)
                 .build(),
-            DeactivateLifelineBuilder.deactivation().of(targetName).build()
+            LifelineBuilder.deactivation().of(targetName).build()
         )
     }
 

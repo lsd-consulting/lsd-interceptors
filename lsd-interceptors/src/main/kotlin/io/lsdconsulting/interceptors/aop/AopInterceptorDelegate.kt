@@ -1,8 +1,8 @@
 package io.lsdconsulting.interceptors.aop
 
 import com.lsd.core.LsdContext
-import com.lsd.core.builders.ActivateLifelineBuilder
-import com.lsd.core.builders.DeactivateLifelineBuilder
+import com.lsd.core.builders.LifelineBuilder
+
 import com.lsd.core.builders.MessageBuilder.Companion.messageBuilder
 import com.lsd.core.domain.MessageType
 import io.lsdconsulting.interceptors.common.AppName
@@ -89,7 +89,7 @@ class AopInterceptorDelegate(
                     ).render()
                 )
                 .build(),
-            ActivateLifelineBuilder.activation().of(appName.value).colour("skyblue").build()
+            LifelineBuilder.activation().of(appName.value).colour("skyblue").build()
         )
     }
 
@@ -115,7 +115,7 @@ class AopInterceptorDelegate(
                 .type(MessageType.SHORT_INBOUND)
                 .duration(Duration.ofMillis(duration))
                 .build(),
-            DeactivateLifelineBuilder.deactivation().of(appName.value).build()
+            LifelineBuilder.deactivation().of(appName.value).build()
         )
     }
 
