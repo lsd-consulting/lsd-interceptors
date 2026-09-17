@@ -103,6 +103,17 @@ subprojects {
                 }
             }
         }
+        apply plugin: 'signing'
+        signing {
+            if (rootProject.findProperty("signingKey")) {
+                def signingKey = rootProject.findProperty("signingKey")
+                def signingPassword = rootProject.findProperty("signingPassword")
+                useInMemoryPgpKeys(signingKey, signingPassword)
+                sign publishing.publications
+            } else {
+                sign publishing.publications
+            }
+        }
     }
 }
 
@@ -112,18 +123,5 @@ nexusPublishing {
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
             snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
         }
-    }
-}
-
-signing {
-    if (project.findProperty("signingKey")) {
-        // Use in-memory ascii-armored keys
-        def signingKey = findProperty("signingKey")
-        def signingPassword = findProperty("signingPassword")
-        useInMemoryPgpKeys(signingKey, signingPassword)
-        sign publishing.publications
-    } else {
-        // Use signing properties in ~/.gradle/gradle.properties
-        sign publishing.publications
     }
 }
