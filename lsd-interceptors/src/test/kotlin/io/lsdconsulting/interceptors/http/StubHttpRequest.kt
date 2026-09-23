@@ -13,4 +13,5 @@ data class StubHttpRequest(
     override fun getHeaders(): HttpHeaders = httpHeaders
     override fun getMethod(): HttpMethod = HttpMethod.valueOf(methodValue)
     override fun getURI(): URI = uri
+    override fun getAttributes(): MutableMap<String, Any> = mutableMapOf()
 }

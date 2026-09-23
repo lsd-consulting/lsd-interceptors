@@ -76,7 +76,8 @@ internal class EventNameDeriverShould {
     @Test
     fun `handle null type id header`() {
         val messageProperties = MessageProperties()
-        messageProperties.setHeader("__TypeId__", null)
+        @Suppress("UNCHECKED_CAST")
+        (messageProperties.headers as MutableMap<String, Any?>)["__TypeId__"] = null
 
         val result = deriveEventName(messageProperties, "alternative")
 

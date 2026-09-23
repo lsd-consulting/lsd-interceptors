@@ -14,9 +14,6 @@ data class StubClientHttpResponse(
         return statusCode
     }
 
-    override fun getRawStatusCode(): Int {
-        return statusCode.value()
-    }
 
     override fun getStatusText(): String {
         return statusCode.value().toString() + statusCode.reasonPhrase
