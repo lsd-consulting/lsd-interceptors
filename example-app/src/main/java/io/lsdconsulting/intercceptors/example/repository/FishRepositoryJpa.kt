@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Transactional
 @Repository
-interface FishRepositoryJpa : CrudRepository<Fish?, String?> {
+interface FishRepositoryJpa : CrudRepository<Fish, String?> {
     fun findFishByName(name: String?): Fish?
     fun deleteByName(name: String?)
 }
