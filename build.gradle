@@ -26,8 +26,8 @@ wrapper {
 allprojects {
     plugins.withId('java') {
         dependencies {
-            implementation 'io.github.lsd-consulting:lsd-core:8.0.18'
-            implementation 'io.github.lsd-consulting:lsd-formatting-library:5.0.36'
+            implementation 'io.github.lsd-consulting:lsd-core:9.0.0'
+            implementation 'io.github.lsd-consulting:lsd-formatting-library:6.0.0'
 
             testImplementation 'org.assertj:assertj-core:3.27.7'
             testImplementation 'io.mockk:mockk-jvm:1.14.11'

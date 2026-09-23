@@ -15,7 +15,7 @@ jobs:
   build:
     uses: lsd-consulting/shared-workflows/.github/workflows/build.yml@main
     with:
-      java-version: '17'
+      java-version: '21'
       codecov: true
       artifact-path: |
             example-app/build/reports
@@ -25,5 +25,5 @@ jobs:
     needs: build
     uses: lsd-consulting/shared-workflows/.github/workflows/release.yml@main
     with:
-      java-version: '17'
+      java-version: '21'
     secrets: inherit
