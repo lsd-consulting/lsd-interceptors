@@ -23,7 +23,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aspectj'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:5.0.3'
-    implementation 'org.flywaydb:flyway-core:11.20.3'
+    implementation 'org.flywaydb:flyway-core:13.7.0'
     implementation "com.h2database:h2"
 
     testImplementation(project(':lsd-interceptors'))
