@@ -23,6 +23,8 @@ dependencies {
     implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.26'
     implementation 'org.springframework.amqp:spring-amqp:4.1.1'
     implementation 'org.springframework.amqp:spring-rabbit:4.1.1'
+    implementation 'org.aspectj:aspectjweaver:1.9.25.1'
+    implementation 'org.springframework.boot:spring-boot-restclient:4.1.1'
     implementation 'org.springframework.boot:spring-boot-autoconfigure:4.1.1'
     implementation 'org.springframework.boot:spring-boot-test:4.1.1'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:5.0.3'
