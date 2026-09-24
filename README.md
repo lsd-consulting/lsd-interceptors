@@ -129,7 +129,7 @@ application.
 
 ### Requirements
 
-* Java 11
+* Java 21
 
 ### Git hooks
 
