@@ -143,3 +143,19 @@ The custom hooks in .githooks will be configured when `gradle clean` is run.
 ### Release
 
 Releases are automated via the semantic-release github action when commits are merged into the remote master
+
+## Releasing
+
+Pushing to master builds but does not release. Maven Central limits the
+io.github.lsd-consulting namespace to 7 releases a month, so each release is
+started on purpose. semantic-release still picks the version from the feat/fix
+commits since the last release, and does nothing if there are none.
+
+Release by hand:
+
+```
+gh workflow run release.yml -R lsd-consulting/lsd-interceptors -f reason="why this release is needed"
+```
+
+To release weekly instead (Tuesday 07:00 UTC), set the repository variable
+`WEEKLY_RELEASE` to `true`. It is off by default.
