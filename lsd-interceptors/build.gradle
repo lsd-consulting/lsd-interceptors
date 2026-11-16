@@ -15,12 +15,12 @@ kotlin {
 }
 
 dependencies {
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.22.4'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.23.0'
     implementation 'com.j2html:j2html:1.6.0'
     implementation 'com.squareup.okhttp3:okhttp:5.5.1'
     implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
-    implementation 'org.apache.commons:commons-lang3:3.21.0'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.27'
+    implementation 'org.apache.commons:commons-lang3:3.22.0'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.29'
     implementation 'org.springframework.amqp:spring-amqp:4.1.2'
     implementation 'org.springframework.amqp:spring-rabbit:4.1.2'
     implementation 'org.aspectj:aspectjweaver:1.9.27'
